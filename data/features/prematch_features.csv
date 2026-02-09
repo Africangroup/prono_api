@@ -1,0 +1,241 @@
+date,home_team,away_team,home_avg_goals,away_avg_goals,home_goal_variance,away_goal_variance,over_1_5,under_3_5
+2025-08-15,Liverpool,Bournemouth,1.2,1.4,1.8,2.6,1,0
+2025-08-16,Aston Villa,Newcastle,1.6,1.6,2.4,4.0,0,1
+2025-08-16,Brighton,Fulham,1.4,2.0,2.6,4.0,1,1
+2025-08-16,Sunderland,West Ham,1.4,2.0,2.2,3.0,1,1
+2025-08-16,Tottenham,Burnley,1.2,1.8,2.6,2.8,1,1
+2025-08-16,Wolves,Man City,0.8,0.8,2.2,3.0,1,0
+2025-08-17,Chelsea,Crystal Palace,1.6,1.4,2.6,1.8,0,1
+2025-08-17,Nott'm Forest,Brentford,0.8,0.6,2.0,2.8,1,0
+2025-08-17,Man United,Arsenal,1.8,0.6,3.0,2.6,0,1
+2025-08-18,Leeds,Everton,2.4,2.0,3.6,3.4,0,1
+2025-08-22,West Ham,Chelsea,1.0,1.0,3.0,2.6,1,0
+2025-08-23,Arsenal,Leeds,2.0,1.2,2.6,3.6,1,0
+2025-08-23,Burnley,Sunderland,1.0,0.8,2.8,2.2,1,1
+2025-08-23,Brentford,Aston Villa,2.2,0.8,2.8,2.4,0,1
+2025-08-23,Bournemouth,Wolves,1.2,1.4,2.6,2.2,0,1
+2025-08-23,Man City,Tottenham,2.2,1.4,3.0,2.6,1,1
+2025-08-24,Crystal Palace,Nott'm Forest,0.4,1.2,1.8,2.0,1,1
+2025-08-24,Everton,Brighton,1.4,1.2,3.4,2.6,1,1
+2025-08-24,Fulham,Man United,2.0,1.2,4.0,3.0,1,1
+2025-08-25,Newcastle,Liverpool,2.4,0.6,4.0,1.8,1,0
+2025-08-30,Chelsea,Fulham,1.6,2.0,2.6,4.0,1,1
+2025-08-30,Man United,Burnley,1.8,1.8,3.0,2.8,1,0
+2025-08-30,Sunderland,Brentford,1.4,0.6,2.2,2.8,1,1
+2025-08-30,Tottenham,Bournemouth,1.2,1.4,2.6,2.6,0,1
+2025-08-30,Wolves,Everton,0.8,2.0,2.2,3.4,1,0
+2025-08-30,Leeds,Newcastle,2.4,1.6,3.6,4.0,0,1
+2025-08-31,Liverpool,Arsenal,1.2,0.6,1.8,2.6,0,1
+2025-08-31,Aston Villa,Crystal Palace,1.6,1.4,2.4,1.8,1,1
+2025-08-31,Brighton,Man City,1.4,0.8,2.6,3.0,1,1
+2025-08-31,Nott'm Forest,West Ham,0.8,2.0,2.0,3.0,1,1
+2025-09-13,Arsenal,Nott'm Forest,2.0,1.2,2.6,2.0,1,1
+2025-09-13,Bournemouth,Brighton,1.2,1.2,2.6,2.6,1,1
+2025-09-13,Crystal Palace,Sunderland,0.4,0.8,1.8,2.2,0,1
+2025-09-13,Everton,Aston Villa,1.4,0.8,3.4,2.4,0,1
+2025-09-13,Fulham,Leeds,2.0,1.2,4.0,3.6,0,1
+2025-09-13,Newcastle,Wolves,2.4,1.4,4.0,2.2,0,1
+2025-09-13,West Ham,Tottenham,1.0,1.4,3.0,2.6,1,1
+2025-09-13,Brentford,Chelsea,2.2,1.0,2.8,2.6,1,0
+2025-09-14,Burnley,Liverpool,1.0,0.6,2.8,1.8,0,1
+2025-09-14,Man City,Man United,2.2,1.2,3.0,3.0,1,1
+2025-09-20,Fulham,Brentford,2.0,0.6,4.0,2.8,1,0
+2025-09-20,Man United,Chelsea,1.8,1.0,3.0,2.6,1,1
+2025-09-20,Wolves,Leeds,0.8,1.2,2.2,3.6,1,0
+2025-09-20,West Ham,Crystal Palace,1.0,1.4,3.0,1.8,1,1
+2025-09-20,Brighton,Tottenham,1.4,1.4,2.6,2.6,1,0
+2025-09-20,Liverpool,Everton,1.2,2.0,1.8,3.4,1,1
+2025-09-20,Burnley,Nott'm Forest,1.0,1.2,2.8,2.0,1,1
+2025-09-21,Bournemouth,Newcastle,1.2,1.6,2.6,4.0,0,1
+2025-09-21,Sunderland,Aston Villa,1.4,0.8,2.2,2.4,1,1
+2025-09-21,Arsenal,Man City,2.0,0.8,2.6,3.0,1,1
+2025-09-27,Brentford,Man United,2.2,1.2,2.8,3.0,1,0
+2025-09-27,Chelsea,Brighton,1.6,1.2,2.6,2.6,1,0
+2025-09-27,Crystal Palace,Liverpool,0.4,0.6,1.8,1.8,1,1
+2025-09-27,Leeds,Bournemouth,2.4,1.4,3.6,2.6,1,0
+2025-09-27,Man City,Burnley,2.2,1.8,3.0,2.8,1,0
+2025-09-27,Nott'm Forest,Sunderland,0.8,0.8,2.0,2.2,0,1
+2025-09-27,Tottenham,Wolves,1.2,1.4,2.6,2.2,1,1
+2025-09-28,Aston Villa,Fulham,1.6,2.0,2.4,4.0,1,0
+2025-09-28,Newcastle,Arsenal,2.4,0.6,4.0,2.6,1,1
+2025-09-29,Everton,West Ham,1.4,2.0,3.4,3.0,1,1
+2025-10-03,Bournemouth,Fulham,1.2,2.0,2.6,4.0,1,0
+2025-10-04,Leeds,Tottenham,2.4,1.4,3.6,2.6,1,1
+2025-10-04,Arsenal,West Ham,2.0,2.0,2.6,3.0,1,1
+2025-10-04,Man United,Sunderland,1.8,0.8,3.0,2.2,1,1
+2025-10-04,Chelsea,Liverpool,1.6,0.6,2.6,1.8,1,1
+2025-10-05,Aston Villa,Burnley,1.6,1.8,2.4,2.8,1,1
+2025-10-05,Everton,Crystal Palace,1.4,1.4,3.4,1.8,1,1
+2025-10-05,Newcastle,Nott'm Forest,2.4,1.2,4.0,2.0,1,1
+2025-10-05,Wolves,Brighton,0.8,1.2,2.2,2.6,1,1
+2025-10-05,Brentford,Man City,2.2,0.8,2.8,3.0,0,1
+2025-10-18,Fulham,Arsenal,2.0,0.6,4.0,2.6,0,1
+2025-10-18,Sunderland,Wolves,1.4,1.4,2.2,2.2,1,1
+2025-10-18,Man City,Everton,2.2,2.0,3.0,3.4,1,1
+2025-10-18,Crystal Palace,Bournemouth,0.4,1.4,1.8,2.6,1,0
+2025-10-18,Burnley,Leeds,1.0,1.2,2.8,3.6,1,1
+2025-10-18,Brighton,Newcastle,1.4,1.6,2.6,4.0,1,1
+2025-10-18,Nott'm Forest,Chelsea,0.8,1.0,2.0,2.6,1,1
+2025-10-19,Tottenham,Aston Villa,1.2,0.8,2.6,2.4,1,1
+2025-10-19,Liverpool,Man United,1.2,1.2,1.8,3.0,1,1
+2025-10-20,West Ham,Brentford,1.0,0.6,3.0,2.8,1,1
+2025-10-24,Leeds,West Ham,2.4,2.0,3.6,3.0,1,1
+2025-10-25,Chelsea,Sunderland,1.6,0.8,2.6,2.2,1,1
+2025-10-25,Newcastle,Fulham,2.4,2.0,4.0,4.0,1,1
+2025-10-25,Man United,Brighton,1.8,1.2,3.0,2.6,1,0
+2025-10-25,Brentford,Liverpool,2.2,0.6,2.8,1.8,1,0
+2025-10-26,Wolves,Burnley,0.8,1.8,2.2,2.8,1,0
+2025-10-26,Bournemouth,Nott'm Forest,1.2,1.2,2.6,2.0,1,1
+2025-10-26,Everton,Tottenham,1.4,1.4,3.4,2.6,1,1
+2025-10-26,Arsenal,Crystal Palace,2.0,1.4,2.6,1.8,0,1
+2025-10-26,Aston Villa,Man City,1.6,0.8,2.4,3.0,0,1
+2025-11-01,Brighton,Leeds,1.4,1.2,2.6,3.6,1,1
+2025-11-01,Burnley,Arsenal,1.0,0.6,2.8,2.6,1,1
+2025-11-01,Crystal Palace,Brentford,0.4,0.6,1.8,2.8,1,1
+2025-11-01,Fulham,Wolves,2.0,1.4,4.0,2.2,1,1
+2025-11-01,Nott'm Forest,Man United,0.8,1.2,2.0,3.0,1,0
+2025-11-01,Tottenham,Chelsea,1.2,1.0,2.6,2.6,0,1
+2025-11-01,Liverpool,Aston Villa,1.2,0.8,1.8,2.4,1,1
+2025-11-02,West Ham,Newcastle,1.0,1.6,3.0,4.0,1,0
+2025-11-02,Man City,Bournemouth,2.2,1.4,3.0,2.6,1,0
+2025-11-03,Sunderland,Everton,1.4,2.0,2.2,3.4,1,1
+2025-11-08,Chelsea,Wolves,1.6,1.4,2.6,2.2,1,1
+2025-11-08,West Ham,Burnley,1.0,1.8,3.0,2.8,1,0
+2025-11-08,Sunderland,Arsenal,1.4,0.6,2.2,2.6,1,0
+2025-11-08,Tottenham,Man United,1.2,1.2,2.6,3.0,1,0
+2025-11-08,Everton,Fulham,1.4,2.0,3.4,4.0,1,1
+2025-11-09,Aston Villa,Bournemouth,1.6,1.4,2.4,2.6,1,0
+2025-11-09,Brentford,Newcastle,2.2,1.6,2.8,4.0,1,0
+2025-11-09,Crystal Palace,Brighton,0.4,1.2,1.8,2.6,0,1
+2025-11-09,Nott'm Forest,Leeds,0.8,1.2,2.0,3.6,1,0
+2025-11-09,Man City,Liverpool,2.2,0.6,3.0,1.8,1,1
+2025-11-22,Burnley,Chelsea,1.0,1.0,2.8,2.6,1,1
+2025-11-22,Bournemouth,West Ham,1.2,2.0,2.6,3.0,1,0
+2025-11-22,Brighton,Brentford,1.4,0.6,2.6,2.8,1,1
+2025-11-22,Fulham,Sunderland,2.0,0.8,4.0,2.2,0,1
+2025-11-22,Liverpool,Nott'm Forest,1.2,1.2,1.8,2.0,1,1
+2025-11-22,Wolves,Crystal Palace,0.8,1.4,2.2,1.8,1,1
+2025-11-22,Newcastle,Man City,2.4,0.8,4.0,3.0,1,1
+2025-11-23,Leeds,Aston Villa,2.4,0.8,3.6,2.4,1,1
+2025-11-23,Arsenal,Tottenham,2.0,1.4,2.6,2.6,1,0
+2025-11-24,Man United,Everton,1.8,2.0,3.0,3.4,0,1
+2025-11-29,Brentford,Burnley,2.2,1.8,2.8,2.8,1,0
+2025-11-29,Man City,Leeds,2.2,1.2,3.0,3.6,1,0
+2025-11-29,Sunderland,Bournemouth,1.4,1.4,2.2,2.6,1,0
+2025-11-29,Everton,Newcastle,1.4,1.6,3.4,4.0,1,0
+2025-11-29,Tottenham,Fulham,1.2,2.0,2.6,4.0,1,1
+2025-11-30,Crystal Palace,Man United,0.4,1.2,1.8,3.0,1,1
+2025-11-30,Aston Villa,Wolves,1.6,1.4,2.4,2.2,0,1
+2025-11-30,Nott'm Forest,Brighton,0.8,1.2,2.0,2.6,1,1
+2025-11-30,West Ham,Liverpool,1.0,0.6,3.0,1.8,1,1
+2025-11-30,Chelsea,Arsenal,1.6,0.6,2.6,2.6,1,1
+2025-12-02,Bournemouth,Everton,1.2,2.0,2.6,3.4,0,1
+2025-12-02,Fulham,Man City,2.0,0.8,4.0,3.0,1,0
+2025-12-02,Newcastle,Tottenham,2.4,1.4,4.0,2.6,1,0
+2025-12-03,Liverpool,Sunderland,1.2,0.8,1.8,2.2,1,1
+2025-12-03,Leeds,Chelsea,2.4,1.0,3.6,2.6,1,0
+2025-12-03,Wolves,Nott'm Forest,0.8,1.2,2.2,2.0,0,1
+2025-12-03,Arsenal,Brentford,2.0,0.6,2.6,2.8,1,1
+2025-12-03,Brighton,Aston Villa,1.4,0.8,2.6,2.4,1,0
+2025-12-03,Burnley,Crystal Palace,1.0,1.4,2.8,1.8,0,1
+2025-12-04,Man United,West Ham,1.8,2.0,3.0,3.0,1,1
+2025-12-06,Tottenham,Brentford,1.2,0.6,2.6,2.8,1,1
+2025-12-06,Aston Villa,Arsenal,1.6,0.6,2.4,2.6,1,1
+2025-12-06,Bournemouth,Chelsea,1.2,1.0,2.6,2.6,0,1
+2025-12-06,Everton,Nott'm Forest,1.4,1.2,3.4,2.0,1,1
+2025-12-06,Man City,Sunderland,2.2,0.8,3.0,2.2,1,1
+2025-12-06,Newcastle,Burnley,2.4,1.8,4.0,2.8,1,1
+2025-12-06,Leeds,Liverpool,2.4,0.6,3.6,1.8,1,0
+2025-12-07,Fulham,Crystal Palace,2.0,1.4,4.0,1.8,1,1
+2025-12-07,Brighton,West Ham,1.4,2.0,2.6,3.0,1,1
+2025-12-08,Wolves,Man United,0.8,1.2,2.2,3.0,1,0
+2025-12-13,Chelsea,Everton,1.6,2.0,2.6,3.4,1,1
+2025-12-13,Liverpool,Brighton,1.2,1.2,1.8,2.6,1,1
+2025-12-13,Burnley,Fulham,1.0,2.0,2.8,4.0,1,0
+2025-12-13,Arsenal,Wolves,2.0,1.4,2.6,2.2,1,1
+2025-12-14,Crystal Palace,Man City,0.4,0.8,1.8,3.0,1,1
+2025-12-14,Nott'm Forest,Tottenham,0.8,1.4,2.0,2.6,1,1
+2025-12-14,Sunderland,Newcastle,1.4,1.6,2.2,4.0,0,1
+2025-12-14,West Ham,Aston Villa,1.0,0.8,3.0,2.4,1,0
+2025-12-14,Brentford,Leeds,2.2,1.2,2.8,3.6,1,1
+2025-12-15,Man United,Bournemouth,1.8,1.4,3.0,2.6,1,0
+2025-12-20,Brighton,Sunderland,1.4,0.8,2.6,2.2,0,1
+2025-12-20,Leeds,Crystal Palace,2.4,1.4,3.6,1.8,1,0
+2025-12-20,Everton,Arsenal,1.4,0.6,3.4,2.6,0,1
+2025-12-20,Tottenham,Liverpool,1.2,0.6,2.6,1.8,1,1
+2025-12-20,Newcastle,Chelsea,2.4,1.0,4.0,2.6,1,0
+2025-12-20,Man City,West Ham,2.2,2.0,3.0,3.0,1,1
+2025-12-20,Bournemouth,Burnley,1.2,1.8,2.6,2.8,1,1
+2025-12-20,Wolves,Brentford,0.8,0.6,2.2,2.8,1,1
+2025-12-21,Aston Villa,Man United,1.6,1.2,2.4,3.0,1,1
+2025-12-22,Fulham,Nott'm Forest,2.0,1.2,4.0,2.0,0,1
+2025-12-26,Man United,Newcastle,1.8,1.6,3.0,4.0,0,1
+2025-12-27,Liverpool,Wolves,1.2,1.4,1.8,2.2,1,1
+2025-12-27,Burnley,Everton,1.0,2.0,2.8,3.4,0,1
+2025-12-27,West Ham,Fulham,1.0,2.0,3.0,4.0,0,1
+2025-12-27,Arsenal,Brighton,2.0,1.2,2.6,2.6,1,1
+2025-12-27,Nott'm Forest,Man City,0.8,0.8,2.0,3.0,1,1
+2025-12-27,Brentford,Bournemouth,2.2,1.4,2.8,2.6,1,0
+2025-12-27,Chelsea,Aston Villa,1.6,0.8,2.6,2.4,1,1
+2025-12-28,Crystal Palace,Tottenham,0.4,1.4,1.8,2.6,0,1
+2025-12-28,Sunderland,Leeds,1.4,1.2,2.2,3.6,1,1
+2025-12-30,Burnley,Newcastle,1.0,1.6,2.8,4.0,1,0
+2025-12-30,Chelsea,Bournemouth,1.6,1.4,2.6,2.6,1,0
+2025-12-30,Nott'm Forest,Everton,0.8,2.0,2.0,3.4,1,1
+2025-12-30,West Ham,Brighton,1.0,1.2,3.0,2.6,1,0
+2025-12-30,Arsenal,Aston Villa,2.0,0.8,2.6,2.4,1,0
+2025-12-30,Man United,Wolves,1.8,1.4,3.0,2.2,1,1
+2026-01-01,Crystal Palace,Fulham,0.4,2.0,1.8,4.0,1,1
+2026-01-01,Liverpool,Leeds,1.2,1.2,1.8,3.6,0,1
+2026-01-01,Brentford,Tottenham,2.2,1.4,2.8,2.6,0,1
+2026-01-01,Sunderland,Man City,1.4,0.8,2.2,3.0,0,1
+2026-01-03,Bournemouth,Arsenal,1.2,0.6,2.6,2.6,1,0
+2026-01-03,Wolves,West Ham,0.8,2.0,2.2,3.0,1,1
+2026-01-03,Brighton,Burnley,1.4,1.8,2.6,2.8,1,1
+2026-01-03,Aston Villa,Nott'm Forest,1.6,1.2,2.4,2.0,1,0
+2026-01-04,Leeds,Man United,2.4,1.2,3.6,3.0,1,1
+2026-01-04,Everton,Brentford,1.4,0.6,3.4,2.8,1,0
+2026-01-04,Newcastle,Crystal Palace,2.4,1.4,4.0,1.8,1,1
+2026-01-04,Tottenham,Sunderland,1.2,0.8,2.6,2.2,1,1
+2026-01-04,Fulham,Liverpool,2.0,0.6,4.0,1.8,1,0
+2026-01-04,Man City,Chelsea,2.2,1.0,3.0,2.6,1,1
+2026-01-06,West Ham,Nott'm Forest,1.0,1.2,3.0,2.0,1,1
+2026-01-07,Man City,Brighton,2.2,1.2,3.0,2.6,1,1
+2026-01-07,Fulham,Chelsea,2.0,1.0,4.0,2.6,1,1
+2026-01-07,Everton,Wolves,1.4,1.4,3.4,2.2,1,1
+2026-01-07,Burnley,Man United,1.0,1.2,2.8,3.0,1,0
+2026-01-07,Brentford,Sunderland,2.2,0.8,2.8,2.2,1,1
+2026-01-07,Bournemouth,Tottenham,1.2,1.4,2.6,2.6,1,0
+2026-01-07,Crystal Palace,Aston Villa,0.4,0.8,1.8,2.4,0,1
+2026-01-07,Newcastle,Leeds,2.4,1.2,4.0,3.6,1,0
+2026-01-08,Arsenal,Liverpool,2.0,0.6,2.6,1.8,0,1
+2026-01-17,Man United,Man City,1.8,0.8,3.0,3.0,1,1
+2026-01-17,Chelsea,Brentford,1.6,0.6,2.6,2.8,1,1
+2026-01-17,Leeds,Fulham,2.4,2.0,3.6,4.0,0,1
+2026-01-17,Liverpool,Burnley,1.2,1.8,1.8,2.8,1,1
+2026-01-17,Sunderland,Crystal Palace,1.4,1.4,2.2,1.8,1,1
+2026-01-17,Tottenham,West Ham,1.2,2.0,2.6,3.0,1,1
+2026-01-17,Nott'm Forest,Arsenal,0.8,0.6,2.0,2.6,0,1
+2026-01-18,Wolves,Newcastle,0.8,1.6,2.2,4.0,0,1
+2026-01-18,Aston Villa,Everton,1.6,2.0,2.4,3.4,0,1
+2026-01-19,Brighton,Bournemouth,1.4,1.4,2.6,2.6,1,1
+2026-01-24,Bournemouth,Liverpool,1.2,0.6,2.6,1.8,1,0
+2026-01-24,Man City,Wolves,2.2,1.4,3.0,2.2,1,1
+2026-01-24,Fulham,Brighton,2.0,1.2,4.0,2.6,1,1
+2026-01-24,Burnley,Tottenham,1.0,1.4,2.8,2.6,1,0
+2026-01-24,West Ham,Sunderland,1.0,0.8,3.0,2.2,1,0
+2026-01-25,Brentford,Nott'm Forest,2.2,1.2,2.8,2.0,1,1
+2026-01-25,Crystal Palace,Chelsea,0.4,1.0,1.8,2.6,1,0
+2026-01-25,Newcastle,Aston Villa,2.4,0.8,4.0,2.4,1,1
+2026-01-25,Arsenal,Man United,2.0,1.2,2.6,3.0,1,0
+2026-01-26,Everton,Leeds,1.4,1.2,3.4,3.6,1,1
+2026-01-31,Brighton,Everton,1.4,2.0,2.6,3.4,1,1
+2026-01-31,Leeds,Arsenal,2.4,0.6,3.6,2.6,1,0
+2026-01-31,Wolves,Bournemouth,0.8,1.4,2.2,2.6,1,1
+2026-01-31,Chelsea,West Ham,1.6,2.0,2.6,3.0,1,0
+2026-01-31,Liverpool,Newcastle,1.2,1.6,1.8,4.0,1,0
+2026-02-01,Nott'm Forest,Crystal Palace,0.8,1.4,2.0,1.8,1,1
+2026-02-01,Tottenham,Man City,1.2,0.8,2.6,3.0,1,0
+2026-02-01,Aston Villa,Brentford,1.6,0.6,2.4,2.8,0,1
+2026-02-01,Man United,Fulham,1.8,2.0,3.0,4.0,1,0
+2026-02-02,Sunderland,Burnley,1.4,1.8,2.2,2.8,1,1
