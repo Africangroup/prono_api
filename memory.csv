@@ -1,2 +1,6 @@
 minute,proba,xg,shots,fouls,result
 90,0.62,3.12,88,45,0
+
+date,bet_type,confidence,minute,shots,xg,result
+2026-02-01,Over 1.5,78,62,14,1.6,win
+2026-02-01,BTTS non,70,68,9,1.1,loss

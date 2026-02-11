@@ -14,6 +14,13 @@ def home():
 def predict():
     df = pd.read_csv("data/live_training.csv")
 
+@app.get("/prematch/analyze")
+def prematch_test():
+    return {
+        "status": "PREMATCH OK",
+        "message": "Endpoint prematch actif"
+    }
+
     if df.empty:
         return {"error": "Aucune donnée LIVE"}
 
@@ -45,3 +52,4 @@ def predict():
         "fouls": int(row["fouls_total"]),
         "bet_allowed": decision
     }
+

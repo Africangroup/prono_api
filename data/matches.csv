@@ -7,3 +7,7 @@ match_id,minute,goals_home,goals_away,shots_home,shots_away,xg_home,xg_away,foul
 1002,40,0,1,3,5,0.30,0.70,5,8
 1002,60,1,1,6,6,0.80,0.90,9,10
 
+match_id,home,away,date,status,home_goals,away_goals
+1,Barcelona,Real Madrid,2026-02-12,upcoming,,
+2,PSG,Marseille,2026-02-10,live,1,0
+3,Milan,Inter,2026-02-05,finished,2,1
