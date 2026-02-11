@@ -4,24 +4,35 @@ from supabase_client import supabase
 import pandas as pd
 import joblib
 
-
 app = FastAPI(title="PRONO API", version="1.0")
 
-# Chargement du modèle
+# Chargement du modèle live
 model = joblib.load("models/live_xgb.pkl")
 
+
+# ===============================
+# 🟢 ROUTE TEST
+# ===============================
+@app.get("/")
+def home():
+    return {"status": "API PRONO ACTIVE"}
+
+
+# ===============================
+# 🔵 RECUPERER STATS PREMATCH
+# ===============================
 @app.get("/prematch")
 def get_prematch():
     response = supabase.table("prematch_stats").select("*").execute()
     return response.data
 
-@app.get("/")
-def home():
-    return {"status": "API PRONO ACTIVE"}
 
+# ===============================
 # 🔴 ANALYSE LIVE
+# ===============================
 @app.get("/live/signal")
 def live_signal():
+
     df = pd.read_csv("data/live_training.csv")
 
     if df.empty:
@@ -51,26 +62,13 @@ def live_signal():
         "reason": "Pression offensive + xG élevé"
     }
 
-# 🔵 ANALYSE AVANT MATCH (BASE)
-@app.get("/prematch/analyse")
-def prematch():
-    return {
-        "predictions": [
-            {
-                "type": "Over 1.5",
-                "confidence": 71,
-                "risk": "faible",
-                "reason": "Historique de buts élevé"
-            },
-            {
-                "type": "Double chance",
-                "confidence": 69,
-                "risk": "faible",
-                "reason": "Forme stable + avantage domicile"
-            }
 
+# ===============================
+# 🟣 ANALYSE PREMATCH IA
+# ===============================
 @app.get("/prematch/analyse")
 def prematch_analyse():
+
     stats = {
         "avg_goals": 2.4,
         "btts_pct": 42,
@@ -82,7 +80,4 @@ def prematch_analyse():
     return {
         "type": "PREMATCH",
         "predictions": predictions
-    }
-
-        ]
     }
