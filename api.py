@@ -8,52 +8,70 @@ from apifootball_client import (
     get_odds,
     get_h2h,
     get_predictions,
-    get_videos
+    get_videos,
+    run_live_scores_thread,
+    LIVE_SCORES
 )
-import threading
-import websocket
-import json
-import time
-from apifootball_client import run_live_scores_thread, API_KEY
-
-# Lancer le suivi live dès le démarrage
-run_live_scores_thread(API_KEY)
-
-app = FastAPI(title="PRONO API", version="1.0")
+import os
+from dotenv import load_dotenv
 
 # ===============================
-# 🔒 Clé API pour sécuriser les endpoints
+# 🔹 Chargement .env
 # ===============================
-API_KEY = "bd415d4dffc533b3fba291db92889c1fc9c253b6051711d46c9160d1a6a24229"
+load_dotenv()
+API_FOOTBALL_KEY = os.getenv("API_FOOTBALL_KEY")
+CLIENT_API_KEY = os.getenv("CLIENT_API_KEY")
 
-def verify_api_key(x_api_key: str = Header(...)):
-    if x_api_key != API_KEY:
+# ===============================
+# 🔹 Initialisation FastAPI
+# ===============================
+app = FastAPI(title="PRONO API", version="2.0")
+
+# ===============================
+# 🔒 Sécurisation API
+# ===============================
+def verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY: str = Header(...)):
+    if x_API_FOOTBALL_KEY = API_FOOTBALL_KEY:
         raise HTTPException(status_code=401, detail="Unauthorized")
 
 # ===============================
-# 🔵 Endpoint Test
+# 🚀 Lancement WebSocket LIVE au démarrage
+# ===============================
+@app.on_event("startup")
+def startup_event():
+    print("Démarrage WebSocket Live...")
+    run_live_scores_thread(API_FOOTBALL_KEY)
+
+# ===============================
+# 🏠 Test API
 # ===============================
 @app.get("/")
 def home():
-    return {"status": "API PRONO ACTIVE"}
+    return {"status": "PRONO API ACTIVE"}
 
 # ===============================
-# 🔵 Liste des matchs disponibles
+# 📅 Liste des matchs enregistrés
 # ===============================
 @app.get("/prematch/list")
-def prematch_list(x_api_key: str = Header(...)):
-    verify_api_key(x_api_key)
-    response = supabase.table("prematch_stats").select("match_id, home_team, away_team, date").execute()
+def prematch_list(x_API_FOOTBALL_KEY: str = Header(...)):
+    verify_(x_API_FOOTBALL_KEY)
+    response = supabase.table("prematch_stats").select(
+        "match_id, home_team, away_team, date"
+    ).execute()
     return {"matches": response.data}
 
 # ===============================
-# 🔴 Analyse pré-match dynamique
+# 🧠 Analyse Pré-Match IA
 # ===============================
 @app.get("/prematch/analyse/{match_id}")
-def prematch_analyse(match_id: int, x_api_key: str = Header(...)):
-    verify_api_key(x_api_key)
+def prematch_analyse(match_id: int, x_API_FOOTBALL_KEY: str = Header(...)):
+    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
 
-    response = supabase.table("prematch_stats").select("*").eq("match_id", match_id).execute()
+    response = supabase.table("prematch_stats")\
+        .select("*")\
+        .eq("match_id", match_id)\
+        .execute()
+
     stats = response.data[0] if response.data else None
 
     if not stats:
@@ -61,9 +79,10 @@ def prematch_analyse(match_id: int, x_api_key: str = Header(...)):
 
     predictions = prematch_engine(stats)
 
+    # Log dans Supabase
     supabase.table("predictions_log").insert({
         "match_id": match_id,
-        "predictions": predictions,
+        "predictions": predictions
     }).execute()
 
     return {
@@ -73,138 +92,110 @@ def prematch_analyse(match_id: int, x_api_key: str = Header(...)):
     }
 
 # ===============================
-# 🔵 Match Details Full (lineups + stats + odds + h2h + videos + predictions)
+# ⚽ Détails complets match (Ultra endpoint)
 # ===============================
-@app.get("/match_details_full_live/{match_id}")
-async def match_details_full_live(
-    match_id: int, 
-    home_team_id: int = None, 
-    away_team_id: int = None, 
-    x_api_key: str = Header(...)
+@app.get("/match_details_full/{match_id}")
+def match_details_full(
+    match_id: int,
+    home_team_id: int = None,
+    away_team_id: int = None,
+    x_API_FOOTBALL_KEY: str = Header(...)
 ):
-    """
-    Endpoint LIVE ULTRA COMPLÈT :
-    - Lineups, stats, odds, videos, predictions
-    - H2H enrichi
-    - Stats live cumulées + historique live
-    """
-    verify_api_key(x_api_key)
-    data = get_match_details_full_v5(match_id, home_team_id, away_team_id)
+    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
+
+    data = get_match_details_full(
+        match_id,
+        home_team_id,
+        away_team_id
+    )
+
     return data
 
 # ===============================
-# 🔵 Lineups
+# 📊 Lineups
 # ===============================
 @app.get("/lineups/{match_id}")
-async def lineups(match_id: int):
+def lineups(match_id: int, x_API_FOOTBALL_KEY: str = Header(...)):
+    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
     return get_lineups(match_id)
 
 # ===============================
-# 🔵 Statistics
+# 📊 Statistics
 # ===============================
 @app.get("/statistics/{match_id}")
-async def statistics(match_id: int):
+def statistics(match_id: int, x_API_FOOTBALL_KEY: str = Header(...)):
+    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
     return get_statistics(match_id)
 
 # ===============================
-# 🔵 Odds
+# 💰 Odds
 # ===============================
 @app.get("/odds/{match_id}")
-async def odds(match_id: int):
+def odds(match_id: int, x_API_FOOTBALL_KEY: str = Header(...)):
+    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
     return get_odds(match_id)
 
 # ===============================
-# 🔵 H2H
+# 🤝 H2H
 # ===============================
 @app.get("/h2h/{first_team_id}/{second_team_id}")
-async def h2h(first_team_id: int, second_team_id: int):
+def h2h(first_team_id: int, second_team_id: int, x_API_FOOTBALL_KEY: str = Header(...)):
+    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
     return get_h2h(first_team_id, second_team_id)
 
 # ===============================
-# 🔵 Predictions
+# 🔮 Predictions API Football
 # ===============================
 @app.get("/predictions")
-async def predictions_endpoint(
+def predictions_endpoint(
     from_date: str,
     to_date: str,
     country_id: int = None,
     league_id: int = None,
-    match_id: int = None
+    match_id: int = None,
+    x_API_FOOTBALL_KEY: str = Header(...)
 ):
-    return get_predictions(from_date, to_date, country_id, league_id, match_id)
+    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
+
+    return get_predictions(
+        from_date,
+        to_date,
+        country_id,
+        league_id,
+        match_id
+    )
 
 # ===============================
-# 🔵 Videos
+# 🎥 Videos
 # ===============================
 @app.get("/videos")
-async def videos(match_id: int = None):
+def videos(match_id: int = None, x_API_FOOTBALL_KEY: str = Header(...)):
+    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
     return get_videos(match_id)
 
 # ===============================
-# 🔵 Live Scores via WebSocket (optimisé avec filtres)
+# 🔴 Live Scores
 # ===============================
-LIVE_SCORES = {}
-
-def start_live_scores_ws(api_key: str, timezone: str = "+03:00"):
-    url = f"wss://wss.apifootball.com/livescore?APIkey={api_key}&timezone={timezone}"
-
-    def on_message(ws, message):
-        global LIVE_SCORES
-        try:
-            data = json.loads(message)
-            for match in data:
-                match_id = match.get("match_id")
-                if match_id:
-                    LIVE_SCORES[match_id] = match
-        except Exception as e:
-            print("Erreur parsing WS message:", e)
-
-    def on_error(ws, error):
-        print("WebSocket error:", error)
-
-    def on_close(ws, close_status_code, close_msg):
-        print("WebSocket closed, reconnecting...")
-        time.sleep(5)
-        start_live_scores_ws(api_key, timezone)
-
-    def on_open(ws):
-        print("Connecté au WebSocket live scores")
-
-    ws = websocket.WebSocketApp(
-        url,
-        on_message=on_message,
-        on_error=on_error,
-        on_close=on_close,
-        on_open=on_open
-    )
-    ws.run_forever()
-
-# Lancer le WebSocket dans un thread séparé
-threading.Thread(target=start_live_scores_ws, args=(API_KEY,), daemon=True).start()
-
-# Endpoint filtrable par match_id et league_id
 @app.get("/live_scores")
-async def live_scores_endpoint(
-    x_api_key: str = Header(...),
+def live_scores_endpoint(
+    x_API_FOOTBALL_KEY: str = Header(...),
     match_id: int = None,
     league_id: int = None
 ):
-    verify_api_key(x_api_key)
+    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
 
     if not LIVE_SCORES:
-        return {"message": "Aucun score en direct pour le moment"}
+        return {"message": "Aucun match live actuellement"}
 
     results = list(LIVE_SCORES.values())
 
-    # Filtrer par match_id
     if match_id:
         results = [m for m in results if int(m.get("match_id", 0)) == match_id]
 
-    # Filtrer par league_id
     if league_id:
         results = [m for m in results if int(m.get("league_id", 0)) == league_id]
 
     if not results:
-        return {"message": "Aucun score correspondant aux filtres"}
+        return {"message": "Aucun résultat correspondant"}
 
-    return {"live_scores": results}
+    return {"live_matches": results}
