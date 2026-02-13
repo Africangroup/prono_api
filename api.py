@@ -16,9 +16,10 @@ import os
 from dotenv import load_dotenv
 
 # ===============================
-# 🔹 Chargement .env
+# 🔹 Chargement variables .env
 # ===============================
 load_dotenv()
+
 API_FOOTBALL_KEY = os.getenv("API_FOOTBALL_KEY")
 CLIENT_API_KEY = os.getenv("CLIENT_API_KEY")
 
@@ -28,19 +29,22 @@ CLIENT_API_KEY = os.getenv("CLIENT_API_KEY")
 app = FastAPI(title="PRONO API", version="2.0")
 
 # ===============================
-# 🔒 Sécurisation API
+# 🔒 Sécurisation API (clé client)
 # ===============================
-def verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY: str = Header(...)):
-    if x_API_FOOTBALL_KEY = API_FOOTBALL_KEY:
+def verify_api_key(x_api_key: str = Header(...)):
+    if x_api_key != CLIENT_API_KEY:
         raise HTTPException(status_code=401, detail="Unauthorized")
 
 # ===============================
-# 🚀 Lancement WebSocket LIVE au démarrage
+# 🚀 Lancement Live Thread
 # ===============================
 @app.on_event("startup")
 def startup_event():
-    print("Démarrage WebSocket Live...")
-    run_live_scores_thread(API_FOOTBALL_KEY)
+    print("🔴 Démarrage WebSocket Live...")
+    if API_FOOTBALL_KEY:
+        run_live_scores_thread(API_FOOTBALL_KEY)
+    else:
+        print("⚠️ API_FOOTBALL_KEY non configurée")
 
 # ===============================
 # 🏠 Test API
@@ -53,33 +57,35 @@ def home():
 # 📅 Liste des matchs enregistrés
 # ===============================
 @app.get("/prematch/list")
-def prematch_list(x_API_FOOTBALL_KEY: str = Header(...)):
-    verify_(x_API_FOOTBALL_KEY)
+def prematch_list(x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
+
     response = supabase.table("prematch_stats").select(
         "match_id, home_team, away_team, date"
     ).execute()
+
     return {"matches": response.data}
 
 # ===============================
 # 🧠 Analyse Pré-Match IA
 # ===============================
 @app.get("/prematch/analyse/{match_id}")
-def prematch_analyse(match_id: int, x_API_FOOTBALL_KEY: str = Header(...)):
-    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
+def prematch_analyse(match_id: int, x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
 
-    response = supabase.table("prematch_stats")\
-        .select("*")\
-        .eq("match_id", match_id)\
+    response = supabase.table("prematch_stats") \
+        .select("*") \
+        .eq("match_id", match_id) \
         .execute()
 
     stats = response.data[0] if response.data else None
 
     if not stats:
-        return {"error": "Match stats not found"}
+        raise HTTPException(status_code=404, detail="Match stats not found")
 
     predictions = prematch_engine(stats)
 
-    # Log dans Supabase
+    # Log prédictions
     supabase.table("predictions_log").insert({
         "match_id": match_id,
         "predictions": predictions
@@ -92,55 +98,53 @@ def prematch_analyse(match_id: int, x_API_FOOTBALL_KEY: str = Header(...)):
     }
 
 # ===============================
-# ⚽ Détails complets match (Ultra endpoint)
+# ⚽ Détails complets match
 # ===============================
 @app.get("/match_details_full/{match_id}")
 def match_details_full(
     match_id: int,
     home_team_id: int = None,
     away_team_id: int = None,
-    x_API_FOOTBALL_KEY: str = Header(...)
+    x_api_key: str = Header(...)
 ):
-    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
+    verify_api_key(x_api_key)
 
-    data = get_match_details_full(
+    return get_match_details_full(
         match_id,
         home_team_id,
         away_team_id
     )
 
-    return data
-
 # ===============================
 # 📊 Lineups
 # ===============================
 @app.get("/lineups/{match_id}")
-def lineups(match_id: int, x_API_FOOTBALL_KEY: str = Header(...)):
-    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
+def lineups(match_id: int, x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
     return get_lineups(match_id)
 
 # ===============================
 # 📊 Statistics
 # ===============================
 @app.get("/statistics/{match_id}")
-def statistics(match_id: int, x_API_FOOTBALL_KEY: str = Header(...)):
-    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
+def statistics(match_id: int, x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
     return get_statistics(match_id)
 
 # ===============================
 # 💰 Odds
 # ===============================
 @app.get("/odds/{match_id}")
-def odds(match_id: int, x_API_FOOTBALL_KEY: str = Header(...)):
-    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
+def odds(match_id: int, x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
     return get_odds(match_id)
 
 # ===============================
 # 🤝 H2H
 # ===============================
 @app.get("/h2h/{first_team_id}/{second_team_id}")
-def h2h(first_team_id: int, second_team_id: int, x_API_FOOTBALL_KEY: str = Header(...)):
-    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
+def h2h(first_team_id: int, second_team_id: int, x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
     return get_h2h(first_team_id, second_team_id)
 
 # ===============================
@@ -153,9 +157,9 @@ def predictions_endpoint(
     country_id: int = None,
     league_id: int = None,
     match_id: int = None,
-    x_API_FOOTBALL_KEY: str = Header(...)
+    x_api_key: str = Header(...)
 ):
-    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
+    verify_api_key(x_api_key)
 
     return get_predictions(
         from_date,
@@ -169,8 +173,8 @@ def predictions_endpoint(
 # 🎥 Videos
 # ===============================
 @app.get("/videos")
-def videos(match_id: int = None, x_API_FOOTBALL_KEY: str = Header(...)):
-    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
+def videos(match_id: int = None, x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
     return get_videos(match_id)
 
 # ===============================
@@ -178,11 +182,11 @@ def videos(match_id: int = None, x_API_FOOTBALL_KEY: str = Header(...)):
 # ===============================
 @app.get("/live_scores")
 def live_scores_endpoint(
-    x_API_FOOTBALL_KEY: str = Header(...),
+    x_api_key: str = Header(...),
     match_id: int = None,
     league_id: int = None
 ):
-    verify_API_FOOTBALL_KEY(x_API_FOOTBALL_KEY)
+    verify_api_key(x_api_key)
 
     if not LIVE_SCORES:
         return {"message": "Aucun match live actuellement"}

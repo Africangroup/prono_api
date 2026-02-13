@@ -7,3 +7,4 @@ xgboost
 requests
 supabase
 websocket-client
+python-dotenv
