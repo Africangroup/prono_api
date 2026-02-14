@@ -1,6 +1,8 @@
-from fastapi import FastAPI, Header, HTTPException
-from core.prematch_analysis import prematch_engine
+# api.py
+
+from fastapi import APIRouter, Header, HTTPException
 from supabase_client import supabase
+from core.prematch_analysis import prematch_engine
 from apifootball_client import (
     get_match_details_full,
     get_lineups,
@@ -13,32 +15,31 @@ from apifootball_client import (
     LIVE_SCORES
 )
 import os
+import requests
+from datetime import datetime
 from dotenv import load_dotenv
 
 # ===============================
-# 🔹 Chargement variables .env
+# 🔹 Chargement variables d'environnement
 # ===============================
 load_dotenv()
 
 API_FOOTBALL_KEY = os.getenv("API_FOOTBALL_KEY")
 CLIENT_API_KEY = os.getenv("CLIENT_API_KEY")
 
-# ===============================
-# 🔹 Initialisation FastAPI
-# ===============================
-app = FastAPI(title="PRONO API", version="2.0")
+router = APIRouter()
 
 # ===============================
-# 🔒 Sécurisation API (clé client)
+# 🔒 Vérification clé API
 # ===============================
 def verify_api_key(x_api_key: str = Header(...)):
     if x_api_key != CLIENT_API_KEY:
         raise HTTPException(status_code=401, detail="Unauthorized")
 
 # ===============================
-# 🚀 Lancement Live Thread
+# 🚀 Lancement Thread Live Scores
 # ===============================
-@app.on_event("startup")
+@router.on_event("startup")
 def startup_event():
     print("🔴 Démarrage WebSocket Live...")
     if API_FOOTBALL_KEY:
@@ -47,16 +48,9 @@ def startup_event():
         print("⚠️ API_FOOTBALL_KEY non configurée")
 
 # ===============================
-# 🏠 Test API
+# 📅 Liste des matchs Supabase
 # ===============================
-@app.get("/")
-def home():
-    return {"status": "PRONO API ACTIVE"}
-
-# ===============================
-# 📅 Liste des matchs enregistrés
-# ===============================
-@app.get("/prematch/list")
+@router.get("/prematch/list")
 def prematch_list(x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
 
@@ -67,58 +61,80 @@ def prematch_list(x_api_key: str = Header(...)):
     return {"matches": response.data}
 
 # ===============================
-# 🧠 Analyse Pré-Match IA
+# ⚡ Sync Matches (format VrSOCCER)
 # ===============================
-@app.get("/prematch/analyse/{match_id}")
-def prematch_analyse(match_id: int, x_api_key: str = Header(...)):
+@router.get("/sync-matches")
+def sync_matches(x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
 
-    response = supabase.table("prematch_stats") \
-        .select("*") \
-        .eq("match_id", match_id) \
-        .execute()
+    today = datetime.now().strftime("%Y-%m-%d")
+    url = "https://apiv3.apifootball.com"
 
-    stats = response.data[0] if response.data else None
-
-    if not stats:
-        raise HTTPException(status_code=404, detail="Match stats not found")
-
-    predictions = prematch_engine(stats)
-
-    # Log prédictions
-    supabase.table("predictions_log").insert({
-        "match_id": match_id,
-        "predictions": predictions
-    }).execute()
-
-    return {
-        "type": "PREMATCH",
-        "match_id": match_id,
-        "predictions": predictions
+    params = {
+        "action": "get_events",
+        "from": today,
+        "to": today,
+        "APIkey": API_FOOTBALL_KEY
     }
 
+    resp = requests.get(url, params=params)
+
+    if resp.status_code != 200:
+        raise HTTPException(
+            status_code=resp.status_code,
+            detail="API-Football error"
+        )
+
+    data = resp.json()
+
+    matches = []
+    for match in data:
+        try:
+            matches.append({
+                "match_id": int(match["match_id"]),
+                "league_id": int(match["league_id"]),
+                "home_team_id": int(match["match_hometeam_id"]),
+                "away_team_id": int(match["match_awayteam_id"]),
+                "home_team": match["match_hometeam_name"],
+                "away_team": match["match_awayteam_name"],
+                "date": match["match_date"] + "T" + match["match_time"] + "Z"
+            })
+        except (KeyError, ValueError):
+            continue
+
+    return {"matches": matches, "date": today}
+
 # ===============================
-# ⚽ Détails complets match
+# 📅 Matchs du jour API-Football
 # ===============================
-@app.get("/match_details_full/{match_id}")
-def match_details_full(
-    match_id: int,
-    home_team_id: int = None,
-    away_team_id: int = None,
-    x_api_key: str = Header(...)
-):
+@router.get("/matches/today")
+def matches_today(x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
 
-    return get_match_details_full(
-        match_id,
-        home_team_id,
-        away_team_id
-    )
+    today = datetime.now().strftime("%Y-%m-%d")
+    url = "https://apiv3.apifootball.com"
+
+    params = {
+        "action": "get_events",
+        "from": today,
+        "to": today,
+        "APIkey": API_FOOTBALL_KEY
+    }
+
+    resp = requests.get(url, params=params)
+
+    if resp.status_code != 200:
+        raise HTTPException(
+            status_code=resp.status_code,
+            detail="API-Football error"
+        )
+
+    return resp.json()
 
 # ===============================
 # 📊 Lineups
 # ===============================
-@app.get("/lineups/{match_id}")
+@router.get("/lineups/{match_id}")
 def lineups(match_id: int, x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
     return get_lineups(match_id)
@@ -126,7 +142,7 @@ def lineups(match_id: int, x_api_key: str = Header(...)):
 # ===============================
 # 📊 Statistics
 # ===============================
-@app.get("/statistics/{match_id}")
+@router.get("/statistics/{match_id}")
 def statistics(match_id: int, x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
     return get_statistics(match_id)
@@ -134,23 +150,23 @@ def statistics(match_id: int, x_api_key: str = Header(...)):
 # ===============================
 # 💰 Odds
 # ===============================
-@app.get("/odds/{match_id}")
+@router.get("/odds/{match_id}")
 def odds(match_id: int, x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
     return get_odds(match_id)
 
 # ===============================
-# 🤝 H2H
+# 🔁 H2H
 # ===============================
-@app.get("/h2h/{first_team_id}/{second_team_id}")
+@router.get("/h2h/{first_team_id}/{second_team_id}")
 def h2h(first_team_id: int, second_team_id: int, x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
     return get_h2h(first_team_id, second_team_id)
 
 # ===============================
-# 🔮 Predictions API Football
+# 🤖 Predictions
 # ===============================
-@app.get("/predictions")
+@router.get("/predictions")
 def predictions_endpoint(
     from_date: str,
     to_date: str,
@@ -160,19 +176,12 @@ def predictions_endpoint(
     x_api_key: str = Header(...)
 ):
     verify_api_key(x_api_key)
-
-    return get_predictions(
-        from_date,
-        to_date,
-        country_id,
-        league_id,
-        match_id
-    )
+    return get_predictions(from_date, to_date, country_id, league_id, match_id)
 
 # ===============================
 # 🎥 Videos
 # ===============================
-@app.get("/videos")
+@router.get("/videos")
 def videos(match_id: int = None, x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
     return get_videos(match_id)
@@ -180,7 +189,7 @@ def videos(match_id: int = None, x_api_key: str = Header(...)):
 # ===============================
 # 🔴 Live Scores
 # ===============================
-@app.get("/live_scores")
+@router.get("/live_scores")
 def live_scores_endpoint(
     x_api_key: str = Header(...),
     match_id: int = None,

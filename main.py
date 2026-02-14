@@ -1,20 +1,27 @@
+# main.py
+
 from fastapi import FastAPI
-from supabase_client import supabase
-
-app = FastAPI(title="PRONO API", version="1.0")
+from api import router as api_router
 
 # ===============================
-# 🟢 ROUTE TEST
+# 🚀 Initialisation FastAPI
 # ===============================
-@app.get("/")
-def home():
-    return {"message": "API Pronostics active"}
+app = FastAPI(
+    title="VrSOCCER API",
+    version="2.0"
+)
 
+# ===============================
+# 🏥 Route Health Check
+# ===============================
+@app.get("/health")
+def health_check():
+    """
+    Vérifie que l'API est active
+    """
+    return {"status": "API Pronostics active"}
 
 # ===============================
-# 🔵 RECUPERER STATS PREMATCH
+# 🔗 Inclusion des routes API
 # ===============================
-@app.get("/prematch")
-def get_prematch():
-    response = supabase.table("prematch_stats").select("*").execute()
-    return response.data
+app.include_router(api_router)
