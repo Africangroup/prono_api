@@ -8,3 +8,5 @@ requests
 supabase
 websocket-client
 python-dotenv
+scikit-learn
+tensorflow
